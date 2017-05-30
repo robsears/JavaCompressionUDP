@@ -1,0 +1,26 @@
+apply plugin: 'java'
+version = '0.1'
+
+// Task for building a fat jar in the root directory
+task fatty(type: Jar) {
+    manifest {
+        attributes 'Implementation-Title': 'Java Networking with gzip and UDP',
+                   'Implementation-Version': version,
+                   'Main-Class': 'Main'
+    }
+    baseName = project.name + '-all'
+    destinationDir = file("$rootDir/")
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+    finalizedBy "clean"
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.8.8'
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.8.8'
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: '2.8.0'
+}
