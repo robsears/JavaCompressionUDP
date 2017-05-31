@@ -31,3 +31,5 @@ Received 795 uncompressed bytes.
 This demos a basic client-server model. The client takes a `Message` instance, serializes it into a JSON string, compresses it with gzip, then fires it over UDP to a waiting server. The server receives the compressed data, decompresses it, then deserializes the JSON into a new `Message` instance. It then displays the message and some data about it.
 
 For brevity, this demonstration is taking place over an abstract network. Basically, the computer is sending itself a message. So rather than having two different java programs running, one client and one server, threading is used to maintain them in separate processes, one that listens and one that speaks. One could easily adapt this code to something that transmits over a real network.
+
+More on the subject at this blog entry: https://robsears.com/java-networking-with-compression-and-udp/
